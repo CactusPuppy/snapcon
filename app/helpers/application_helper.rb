@@ -191,9 +191,14 @@ module ApplicationHelper
   # TODO-SNAPCON: Replace this with a search for a conference logo.
   # TODO: If conference is defined, the alt text should be conference name.
   def nav_root_link_for(conference = nil)
+    header_image = 'snapcon_logo.png'
+    if conference&.picture_url.present?
+      header_image = conference.picture_url
+    end
     path = conference&.id.present? ? conference_path(conference) : root_path
     link_to(
-      image_tag('snapcon_logo.png', alt: nav_link_text(conference)),
+      #image_tag('snapcon_logo.png', alt: nav_link_text(conference)),
+      image_tag(header_image, alt: nav_link_text(conference)),
       path,
       class: 'navbar-brand',
       title: nav_link_text(conference)
