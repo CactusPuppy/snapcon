@@ -75,7 +75,8 @@ describe ApplicationHelper, type: :helper do
 
       # TODO-SNAPCON: This is an indicator in a conference it should be the conference name.
       it 'should use the conference organization name' do
-        expect(nav_root_link_for(conference)).to include image_tag('snapcon_logo.png', alt: conference.organization.name)
+        conference&.picture_url.present? ? logo = conference.picture_url : logo = 'snapcon_logo.png'
+        expect(nav_root_link_for(conference)).to include image_tag(logo, alt: conference.organization.name)
       end
     end
 
