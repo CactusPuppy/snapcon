@@ -77,6 +77,8 @@ feature Splashpage do
         visit conference_path(conference.short_title)
 
         expect(find('.navbar-brand img')['alt']).to have_content conference.organization.name
+        conference&.picture_url.present? ? logo = conference.picture_url.split('.')[0] : logo = 'snapcon_logo'
+        expect(find('.navbar-brand img')['src']).to have_content logo
       end
     end
   end
