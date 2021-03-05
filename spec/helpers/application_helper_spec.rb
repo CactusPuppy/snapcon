@@ -78,13 +78,36 @@ describe ApplicationHelper, type: :helper do
         conference&.picture_url.present? ? logo = conference.picture_url : logo = 'snapcon_logo.png'
         expect(nav_root_link_for(conference)).to include image_tag(logo, alt: conference.organization.name)
       end
+    end
+
+    # TODO
+    describe 'navigation image' do
+      it 'should default to snapcon if the conference does not exist' do
+        conference&.destroy
+        expect(nav_root_link_for(nil)).to include ('src="/images/snapcon_logo.png"')
+      end
+
+      # it 'should default to snapcon if it does not exist' do
+      #   conference&.picture.destroy
+      #   expect(nav_root_link_for(nil)).to include image_tag('snapcon_logo.png', alt: '*')
+      # end
+
+      it 'should default to snapcon if it is null' do
+        conference.picture = nil
+        expect(nav_root_link_for(nil)).to include ('src="/images/snapcon_logo.png"')
+      end
+
+      it 'should use the conference logo' do
+        conference&.picture_url.present? ? logo = conference.picture_url : logo = 'snapcon_logo.png'
+        expect(nav_root_link_for(conference)).to include image_tag(logo, alt: conference.organization.name)
+      end
 
       it 'should not always use the snapcon logo' do
         logo = '/spec/support/logos/OSEM.jpg'
-        conference&.picture_url = logo
+        conference&.picture = logo
         conference&.save
         expect(nav_root_link_for(conference)).to include image_tag(logo, alt: conference.organization.name)
-        expect(nav_root_link_for(conference)).to_not include image_tag('snapcon_logo.png', alt: conference.organization.name)
+        expect(nav_root_link_for(conference)).to_not include ('src="/images/snapcon_logo.png"')
       end
      end
 
