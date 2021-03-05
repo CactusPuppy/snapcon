@@ -78,11 +78,13 @@ describe ApplicationHelper, type: :helper do
         conference&.picture_url.present? ? logo = conference.picture_url : logo = 'snapcon_logo.png'
         expect(nav_root_link_for(conference)).to include image_tag(logo, alt: conference.organization.name)
       end
-      
+
       it 'should not always use the snapcon logo' do
-        logo = 'OSEM.jpg'
-        expect(conference.picture_url).to include logo
-        expect(nav_root_link_for(conference)).to include image_tag(conference.picture_url,alt: conference.organization.name)
+        logo = '/spec/support/logos/OSEM.jpg'
+        conference&.picture_url = logo
+        conference&.save
+        expect(nav_root_link_for(conference)).to include image_tag(logo, alt: conference.organization.name)
+        expect(nav_root_link_for(conference)).to_not include image_tag('snapcon_logo.png', alt: conference.organization.name)
       end
      end
 
