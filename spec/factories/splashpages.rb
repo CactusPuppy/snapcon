@@ -21,7 +21,6 @@
 #  include_tracks            :boolean
 #  include_venue             :boolean
 #  picture                   :string
-#  picture_banner            :string
 #  public                    :boolean
 #  shuffle_highlights        :boolean          default(FALSE), not null
 #  created_at                :datetime

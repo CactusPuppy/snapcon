@@ -443,7 +443,6 @@ ActiveRecord::Schema.define(version: 2021_04_28_212313) do
     t.boolean "include_booths"
     t.boolean "shuffle_highlights", default: false, null: false
     t.boolean "include_happening_now"
-    t.string "picture_banner"
     t.string "picture"
   end
 
