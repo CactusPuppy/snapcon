@@ -107,4 +107,8 @@ class PictureUploader < CarrierWave::Uploader::Base
   def conference?(_picture)
     object_class_name == 'conferences'
   end
+
+  def splashpage?(_picture)
+    object_class_name == 'splashpages'
+  end
 end
