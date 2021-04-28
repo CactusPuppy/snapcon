@@ -4,7 +4,7 @@
 #
 # Table name: splashpages
 #
-#  id                        :bigint           not null, primary key
+#  id                        :integer          not null, primary key
 #  banner_photo_content_type :string
 #  banner_photo_file_name    :string
 #  banner_photo_file_size    :integer
@@ -20,6 +20,7 @@
 #  include_tickets           :boolean
 #  include_tracks            :boolean
 #  include_venue             :boolean
+#  picture_banner            :string
 #  public                    :boolean
 #  shuffle_highlights        :boolean          default(FALSE), not null
 #  created_at                :datetime
@@ -30,4 +31,5 @@ class Splashpage < ApplicationRecord
   belongs_to :conference
 
   has_paper_trail ignore: [:updated_at], meta: { conference_id: :conference_id }
+  mount_uploader :picture_banner, PictureUploader, mount_on: :banner_photo_file_name
 end

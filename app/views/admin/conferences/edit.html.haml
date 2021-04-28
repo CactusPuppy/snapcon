@@ -14,11 +14,20 @@
                 input_html: { rows: 5, data: { provide: 'markdown' } }
       = f.input :color, hint: 'The will be used in emails.',
                 input_html: {size: 6, type: 'color'}
-      = f.label 'Conference Logo', for: 'conference_picture'
+
+      = f.label 'Conference Logo', 'Conference Logo', for: 'conference_picture'
       %br
       - if @conference.picture?
         = image_tag @conference.picture.thumb.url
       = f.input :picture, label: false, hint: 'This will be shown in the navigation bar and emails.'
+      = f.hidden_field :picture_cache
+      
+      = f.label 'Banner Image', "Banner Image" , for: 'banner_photo'
+      %br
+      - if @conference.splashpage.banner_photo_file_name?
+        = f.input :title, hint: "The full title of the conference, e.g. 'openSUSE Conference 2014'"
+        = image_tag @conference.splashpage.banner_photo_file_name.thumb.url
+      = f.input :photo_banner, label: false, hint: 'This will be shown in the Splashpage banner.'
       = f.hidden_field :picture_cache
 
       = f.input :custom_css,

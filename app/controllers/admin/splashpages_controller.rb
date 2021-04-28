@@ -15,6 +15,7 @@ module Admin
 
     def create
       @splashpage = @conference.build_splashpage(splashpage_params)
+      @image_url = "#{request.protocol}#{request.host}#{@splashpage.banner_photo_file_name}"
 
       if @splashpage.save
         redirect_to admin_conference_splashpage_path,
@@ -50,7 +51,7 @@ module Admin
                                          :include_venue, :include_registrations,
                                          :include_tickets, :include_lodgings,
                                          :include_sponsors, :include_social_media,
-                                         :include_booths, :include_happening_now)
+                                         :include_booths, :include_happening_now, :banner_photo_file_name, :picture_banner,)
     end
   end
 end

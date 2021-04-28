@@ -40,6 +40,7 @@ class ConferencesController < ApplicationController
 
     @image_url = "#{request.protocol}#{request.host}#{@conference.picture}"
 
+
     if splashpage.include_cfp?
       cfps = @conference.program.cfps
       @call_for_events = cfps.find { |call| call.cfp_type == 'events' }
@@ -75,6 +76,9 @@ class ConferencesController < ApplicationController
         :sponsors
       ).order('sponsorship_levels.position ASC', 'sponsors.name')
       @sponsors = @conference.sponsors
+    end
+    if splashpage.banner_photo_file_name?
+      @banner_photo = @conference.picture
     end
   end
 

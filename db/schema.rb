@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_050437) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2021_04_28_205333) do
 
   create_table "answers", force: :cascade do |t|
     t.string "title"
@@ -443,6 +440,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_050437) do
     t.boolean "include_booths"
     t.boolean "shuffle_highlights", default: false, null: false
     t.boolean "include_happening_now"
+    t.string "picture_banner"
   end
 
   create_table "sponsors", force: :cascade do |t|
